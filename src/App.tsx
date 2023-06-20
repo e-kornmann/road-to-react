@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import Search from './Search';
+import { useSemiPersistantState } from './Hooks/PersistantState'
+import InputWithLabel from './InputWithLabel';
 import List from './List';
 
 export type Article = {
@@ -11,10 +12,6 @@ export type Article = {
   points: number,
   objectID: number,
 }
-
-
-
-
 
 const stories: Article[] = [ {
     title: 'React',
@@ -39,25 +36,28 @@ const stories: Article[] = [ {
 
 function App() {
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useSemiPersistantState('search','');
 
-  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   }
 
-  const searchedArticles = stories.filter((article)=> article.title.toLowerCase().includes(searchTerm.toLowerCase()));
-
-  
-
-
+  const searchedArticles = stories.filter((article) => article.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div className="search-container">
-      <Search onSearch={handleSearchInput} find={searchTerm} />
+      <InputWithLabel 
+        id="search"
+        value={searchTerm} 
+        onInputChange={handleSearch}
+       >
+      <strong>Search:</strong>
+      </InputWithLabel>
+        
+
       <List list={searchedArticles} />
     </div>
   );
-
 
 }
 

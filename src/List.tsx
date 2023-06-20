@@ -11,7 +11,7 @@ type ListProps = {
 const List = ({ list }: ListProps ) => 
     <ul>
       {list.map((item: Article) => (
-       <Item key={item.objectID} {...item} />
+       <Item key={item.objectID} item={item} />
       ))}
     </ul>
   
