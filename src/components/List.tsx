@@ -3,6 +3,7 @@ import { Article } from '../types';
 import Item from './Item';
 
 
+
 type ListProps = {
   list: Article[],
   onRemoveItem: (item: Article) => void

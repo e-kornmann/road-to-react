@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import './App.css';
 import { useStorageState } from './Hooks/storageState';
 import InputWithLabel from './components/InputWithLabel';
 import List from './components/List';
 import { Article } from './types';
-import { stories } from './data'
 import { storiesReducer } from './Hooks/storiesReducer';
+import { stories } from './data';
 
 
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useStorageState('search','React');
-  const [articles, dispatchArticles] = useReducer(storiesReducer, []);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [articles, dispatchArticles] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
   
 
  const getAsyncStories = (): Promise<{ data: { stories: Article[] } }> =>
@@ -22,16 +20,21 @@ const App = () => {
     );
 
     useEffect(() => {
-      setIsLoading(true);
-      getAsyncStories()
-      .then((result) => {
         dispatchArticles({
-          type: 'SET_STORIES',
-          payload: result.data.stories,
+          type: 'STORIES_FETCH_INIT',
         });
-        setIsLoading(false);
-      })
-      .catch(() => setIsError(true));
+        getAsyncStories()
+        .then((result) => {
+          dispatchArticles({
+            type: 'STORIES_FETCH_SUCCESS',
+            payload: result.data.stories,
+          })
+        })
+        .catch(() => {
+          dispatchArticles({
+            type: 'STORIES_FETCH_FAILURE'
+          })
+        });
     }, []); // Empty dependency array
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +49,7 @@ const App = () => {
 
   }
 
-  const searchedArticles: Article[] = articles.filter((article: Article) => article.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const searchedArticles: Article[] = articles.data.filter(article => article.title.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
     <div className="search-container">
@@ -61,9 +64,9 @@ const App = () => {
 
       <hr />
       
-      { isError && <p>Something went wrong</p> }
+      { articles.isError && <p>Something went wrong</p> }
 
-      { isLoading ? ( 
+      { articles.isLoading ? ( 
         <p>Loading ...</p>
         ) : ( 
         <List 

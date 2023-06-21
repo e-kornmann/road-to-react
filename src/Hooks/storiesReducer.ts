@@ -1,14 +1,43 @@
-import { Article } from "../types";
+import { 
+    StorieState,
+    StoriesAction,
+} from "../types";
 
-const storiesReducer = (state: Article[], action: { type: string; payload: any }) => {
+
+
+const storiesReducer = (state: StorieState, action: StoriesAction ) => {
     switch (action.type) {
-      case 'SET_STORIES':
-        return action.payload;
-      case 'REMOVE_STORY':
-        return state.filter((story: Article) => action.payload.objectID !== story.objectID);
+   case 'STORIES_FETCH_INIT':
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case 'STORIES_FETCH_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload,
+      };
+    case 'STORIES_FETCH_FAILURE':
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+       case 'REMOVE_STORY':
+         return {
+            ...state,
+            data: state.data.filter(
+                (story) => action.payload.objectID !== story.objectID
+            ),
+        }
       default :
         throw new Error();
     }
 }
 
 export { storiesReducer }
+
+
