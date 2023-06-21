@@ -5,8 +5,8 @@ import InputWithLabel from './components/InputWithLabel';
 import List from './components/List';
 import { Article } from './types';
 import { storiesReducer } from './Hooks/storiesReducer';
-import { stories } from './data';
 
+import { API_ENDPOINT } from './api';
 
 
 const App = () => {
@@ -14,20 +14,19 @@ const App = () => {
   const [articles, dispatchArticles] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
   
 
- const getAsyncStories = (): Promise<{ data: { stories: Article[] } }> =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve({ data: { stories: stories } }), 2000)
-    );
 
     useEffect(() => {
+        if (!searchTerm) return;
         dispatchArticles({
           type: 'STORIES_FETCH_INIT',
         });
-        getAsyncStories()
+
+        fetch(`${API_ENDPOINT}${searchTerm}`)
+        .then((response) => response.json())
         .then((result) => {
           dispatchArticles({
             type: 'STORIES_FETCH_SUCCESS',
-            payload: result.data.stories,
+            payload: result.hits,
           })
         })
         .catch(() => {
@@ -35,7 +34,7 @@ const App = () => {
             type: 'STORIES_FETCH_FAILURE'
           })
         });
-    }, []); // Empty dependency array
+    }, [searchTerm]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -49,8 +48,7 @@ const App = () => {
 
   }
 
-  const searchedArticles: Article[] = articles.data.filter(article => article.title.toLowerCase().includes(searchTerm.toLowerCase()))
-
+  
   return (
     <div className="search-container">
       <InputWithLabel 
@@ -70,7 +68,7 @@ const App = () => {
         <p>Loading ...</p>
         ) : ( 
         <List 
-          list={searchedArticles}
+          list={articles.data}
           onRemoveItem={handleRemoveStory} />
         )
       }
