@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import './App.css';
 import { useStorageState } from './Hooks/storageState';
 import InputWithLabel from './components/InputWithLabel';
 import List from './components/List';
 import { Article } from './types';
 import { stories } from './data'
+import { storiesReducer } from './Hooks/storiesReducer';
 
 
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useStorageState('search','React');
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, dispatchArticles] = useReducer(storiesReducer, []);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   
@@ -21,10 +22,13 @@ const App = () => {
     );
 
     useEffect(() => {
-      setIsLoading(false);
+      setIsLoading(true);
       getAsyncStories()
       .then((result) => {
-        setArticles(result.data.stories);
+        dispatchArticles({
+          type: 'SET_STORIES',
+          payload: result.data.stories,
+        });
         setIsLoading(false);
       })
       .catch(() => setIsError(true));
@@ -34,7 +38,12 @@ const App = () => {
     setSearchTerm(event.target.value);
   }
     const handleRemoveStory = (item: Article): void => {
-      setArticles(() => articles.filter((story: Article) => item.objectID !== story.objectID))
+       dispatchArticles({
+        type: 'REMOVE_STORY',
+        payload: item,
+      });
+      
+
   }
 
   const searchedArticles: Article[] = articles.filter((article: Article) => article.title.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -52,7 +61,7 @@ const App = () => {
 
       <hr />
       
-      { isError ?? <p>Something went wrong</p> }
+      { isError && <p>Something went wrong</p> }
 
       { isLoading ? ( 
         <p>Loading ...</p>

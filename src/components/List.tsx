@@ -5,7 +5,7 @@ import Item from './Item';
 
 type ListProps = {
   list: Article[],
-  onRemoveItem: (item: Article) => void;
+  onRemoveItem: (item: Article) => void
 }
 
 
