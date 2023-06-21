@@ -1,11 +1,12 @@
 import React from 'react'
-import { Article } from './App';
+import { Article } from '../types';
 
 type ArticleProps = {
     item: Article;
+    onRemoveItem: (item: Article) => void;
 }
 
-const Item = ( { item }: ArticleProps) => {
+const Item = ( { item, onRemoveItem }: ArticleProps) => {
     const {title, url, author, num_comments, points} = item;
   return (
       <li>
@@ -15,6 +16,12 @@ const Item = ( { item }: ArticleProps) => {
         <span>{author}</span>
         <span>{num_comments}</span>
         <span>{points}</span>
+        <span>
+          <button type="button" onClick={() => onRemoveItem(item)}>
+            Dismiss
+          </button>
+        </span>
+
       </li>
   )
 }

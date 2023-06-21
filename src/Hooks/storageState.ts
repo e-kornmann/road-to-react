@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-export const useSemiPersistantState = (key: string, initialState: string): [string, (newValue: string) => void] => {
+export const useStorageState = (key: string, initialState: string): [string, (newValue: string) => void] => {
     
   const [value, setValue] = useState(
     localStorage.getItem(key) || initialState
