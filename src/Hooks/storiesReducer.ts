@@ -1,13 +1,11 @@
 import { 
-    StorieState,
-    StoriesAction,
+  StorieState,
+  StoriesAction,
 } from "../types";
 
-
-
-const storiesReducer = (state: StorieState, action: StoriesAction ) => {
-    switch (action.type) {
-   case 'STORIES_FETCH_INIT':
+const storiesReducer = (state: StorieState, action: StoriesAction) => {
+  switch (action.type) {
+    case 'STORIES_FETCH_INIT':
       return {
         ...state,
         isLoading: true,
@@ -26,18 +24,16 @@ const storiesReducer = (state: StorieState, action: StoriesAction ) => {
         isLoading: false,
         isError: true,
       };
-       case 'REMOVE_STORY':
-         return {
-            ...state,
-            data: state.data.filter(
-                (story) => action.payload.objectID !== story.objectID
-            ),
-        }
-      default :
-        throw new Error();
+    case 'REMOVE_STORY':
+      return {
+        ...state,
+         data: state.data.filter(
+         (story) => action.payload.objectID !== story.objectID
+         ),
     }
+    default :
+      throw new Error();
+  }
 }
 
 export { storiesReducer }
-
-
