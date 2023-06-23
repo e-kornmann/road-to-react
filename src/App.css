@@ -1,5 +1,13 @@
-.search-container {
-  margin: 40px auto;
-  width: 300px;
-  border: 1px solid pink;
+
+@font-face {
+  font-family: "Helvetica Textbook Roman";  
+  src: local("helvetica_textbook_lt_roman"),
+    url("../src/assets/fonts/helvetica_textbook_lt_roman.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Helvetica Textbook Bold";  
+  src: local("helvetica_textbook_lt_bold"),
+    url("../src/assets/fonts/helvetica_textbook_lt_bold.ttf") format("truetype");
+}
+

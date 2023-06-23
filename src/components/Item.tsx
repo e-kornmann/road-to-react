@@ -1,5 +1,8 @@
 import React from 'react'
 import { Article } from '../types';
+import './item.css';
+import { StyledButtonSmall } from './styledComponents/StyledButtons';
+import CrossIcon from './styledComponents/StyledCrossIcon';
 
 type ArticleProps = {
     item: Article;
@@ -9,20 +12,20 @@ type ArticleProps = {
 const Item = ( { item, onRemoveItem }: ArticleProps) => {
     const {title, url, author, num_comments, points} = item;
   return (
-      <li>
-        <span>
+      <div className="item">
+        <div className="title">
           <a href={url}>{title}</a>
-        </span>
-        <span>{author}</span>
-        <span>{num_comments}</span>
-        <span>{points}</span>
-        <span>
-          <button type="button" onClick={() => onRemoveItem(item)}>
-            Dismiss
-          </button>
-        </span>
+        </div>
+        <span className="author" style={{width: '100%'}}>—<br />{author}</span>
+        <span style={{width: '30%'}}>Comments: <br/>{num_comments}</span>
+        <span style={{width: '30%'}}>Points: <br/>{points}</span>
+        
+          <StyledButtonSmall className="button-small" type="button" onClick={() => onRemoveItem(item)}>
+            Dismiss<CrossIcon />
+          </StyledButtonSmall>
+        
 
-      </li>
+      </div>
   )
 }
 
