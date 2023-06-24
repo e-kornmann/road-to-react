@@ -10,7 +10,13 @@ type ListProps = {
   isLargeDevice: boolean,
 }
 
-const List = ({ list, onRemoveItem, isMediumDevice, isLargeDevice }: ListProps ) => 
+const List = React.memo(({ list, onRemoveItem, isMediumDevice, isLargeDevice }: ListProps ) => {
+  
+  console.log('B:List');
+
+  return (
+
+
   
 <>
 {isMediumDevice && (
@@ -37,6 +43,8 @@ const List = ({ list, onRemoveItem, isMediumDevice, isLargeDevice }: ListProps )
   </StyledArticlesLarge>
 )}
 </>
-
+)
+}
+)
 
 export default List;

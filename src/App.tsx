@@ -1,21 +1,23 @@
-import React from 'react';
-import { ReactComponent as EkLogo } from './assets/svgs/ek-logo.svg';
-import axios from 'axios';
-import './App.css';
-import { useStorageState } from './Hooks/storageState';
-import List from './components/List';
-import { Article } from './types';
-import { storiesReducer } from './Hooks/storiesReducer';
-import { API_ENDPOINT } from './api';
-import SearchForm from './components/SearchForm';
-import useMediaQuery from './Hooks/useMediaQuery';
-import StyledHeadline from './components/styledComponents/StyledHeadline';
-import StyledContainer from './components/styledComponents/StyledContainer';
-import * as Sv from './components/styledComponents/StyleVariables';
-import StyledTechTalkLogo from './components/styledComponents/StyledLogo';
+import React from "react";
+import { ReactComponent as EkLogo } from "./assets/svgs/ek-logo.svg";
+import axios from "axios";
+import "./App.css";
+import { useStorageState } from "./Hooks/storageState";
+import List from "./components/List";
+import { Article, StorieState } from "./types";
+import { storiesReducer } from "./Hooks/storiesReducer";
+import { API_ENDPOINT } from "./api";
+import SearchForm from "./components/SearchForm";
+import useMediaQuery from "./Hooks/useMediaQuery";
+import StyledHeadline from "./components/styledComponents/StyledHeadline";
+import StyledContainer from "./components/styledComponents/StyledContainer";
+import * as Sv from "./components/styledComponents/StyleVariables";
+import StyledTechTalkLogo from "./components/styledComponents/StyledLogo";
 
-
-
+const getSumComments = (stories: StorieState) => {
+  console.log("C");
+  return stories.data.reduce((result, value) => result + value.num_comments, 0);
+};
 
 const App = () => {
   const isMediumDevice = useMediaQuery(
@@ -50,6 +52,7 @@ const App = () => {
   }, [searchQuery]);
 
   React.useEffect(() => {
+    console.log("How many times do I log?");
     handleFetchStory();
   }, [handleFetchStory]);
 
@@ -62,50 +65,69 @@ const App = () => {
     event.preventDefault();
   };
 
-  const handleRemoveStory = (item: Article) => {
+  const handleRemoveStory = React.useCallback((item: Article) => {
     dispatchArticles({
       type: "REMOVE_STORY",
       payload: item,
     });
+  }, []);
+
+  const MyComponent = () => {
+    const clickCountRef = React.useRef(0);
+    const handleClick = () => {
+      clickCountRef.current += 1;
+      console.log(`Button clicked ${clickCountRef.current} times.`);
+    };
+    return <button onClick={handleClick}>Click me</button>;
   };
+
+  const sumComments = React.useMemo(() => getSumComments(articles), [articles]);
+
+  console.log("B:App");
 
   return (
     <StyledContainer>
-     
-      <a href="https://github.com/e-kornmann">
-        <EkLogo height="35px" width="35px" style={{float: 'right', marginTop: '-6px'}} />
-      </a>
       <StyledHeadline>
-        <span style={{
-          fontSize: 
-          isLargeDevice 
-          ? "1.55rem" : 
-          isMediumDevice 
-          ? "1.14rem" 
-          : undefined
-        }}>
-          <StyledTechTalkLogo isLargeDevice={isLargeDevice} /> <span>tech&#8202;talks.</span>
+        <span
+          style={{
+            fontSize: isLargeDevice
+              ? "1.55rem"
+              : isMediumDevice
+              ? "1.14rem"
+              : undefined,
+          }}
+        >
+          <StyledTechTalkLogo isLargeDevice={isLargeDevice} />{" "}
+          <span>tech&#8202;talks.</span>
         </span>
       </StyledHeadline>
- 
-
-     <SearchForm 
-       searchTerm={searchTerm} 
-       handleSearch={handleSearch} 
-       handleSearchSubmit={handleSearchSubmit}  
-       isMediumDevice={isMediumDevice} 
-
+      <SearchForm
+        searchTerm={searchTerm}
+        handleSearch={handleSearch}
+        handleSearchSubmit={handleSearchSubmit}
+        isMediumDevice={isMediumDevice}
       />
-
-      
-        {articles.isError && <p>Something went wrong</p>}
-        {articles.isLoading ? (
-          <p>Loading ...</p>
-        ) : (
-          <List list={articles.data} onRemoveItem={handleRemoveStory} isMediumDevice={isMediumDevice} isLargeDevice={isLargeDevice} />
-        )}
-      
-      </StyledContainer>     
+      {articles.isError && <p>Something went wrong</p>}
+      {articles.isLoading ? (
+        <p>Loading ...</p>
+      ) : (
+        <List
+          list={articles.data}
+          onRemoveItem={handleRemoveStory}
+          isMediumDevice={isMediumDevice}
+          isLargeDevice={isLargeDevice}
+        />
+      )}
+      <a href="https://github.com/e-kornmann">
+        <EkLogo
+          height="44px"
+          width="44px"
+          style={{ float: "right", marginTop: "-6px", marginRight: "-8px" }}
+        />
+      </a>
+      <MyComponent />
+      <h1>My Hacker Stories with {sumComments} comments.</h1>
+    </StyledContainer>
   );
 };
 
