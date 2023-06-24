@@ -15,4 +15,4 @@ const StyledArticlesMedium = styled(StyledArticlesLarge)`
   }
 `;
 
-export { StyledArticlesMedium, StyledArticlesLarge }
+export { StyledArticlesMedium, StyledArticlesLarge };

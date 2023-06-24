@@ -1,0 +1,10 @@
+{
+  "extends": ["salt-typescript"], 
+  "rules": {
+    "no-console": "off",
+    "import/extensions": ["error", "never", { "svg": "always" }]
+  },
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  }
+}

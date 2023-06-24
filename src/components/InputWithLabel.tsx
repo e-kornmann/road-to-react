@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import * as Sv from './styledComponents/StyleVariables';
 
@@ -9,8 +9,7 @@ type InputWithLabelProps = {
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isFocused?: boolean;
   children: React.ReactNode,
-}
-
+};
 
 const StyledLabel = styled.label`
   fontFamily: Helvetica Textbook Bold;
@@ -18,8 +17,7 @@ const StyledLabel = styled.label`
   ${Sv.BlackText}
   width: 300px;
   padding-right: 20px;
-`
-
+`;
 
 const StyledInput = styled.input`
   border: none;
@@ -27,28 +25,26 @@ const StyledInput = styled.input`
   background-color: transparent;
   font-size: 20px;
   width: 80%;
-`
-
+`;
 
 const InputWithLabel = ({
-    id,
-    value,
-    type = 'text',
-    onInputChange,
-    isFocused,
-    children
-  }: InputWithLabelProps) => {
-
+  id,
+  value,
+  type = 'text',
+  onInputChange,
+  isFocused,
+  children,
+}: InputWithLabelProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     if (isFocused && inputRef.current) {
-    inputRef.current.focus();
+      inputRef.current.focus();
     }
   }, [isFocused]);
- 
+
   return (
-  <div style={{width: '90%', lineHeight: '20px'}}>
+  <div style={{ width: '90%', lineHeight: '20px' }}>
     <StyledLabel htmlFor={id}>{children}</StyledLabel>
     <StyledInput
       ref={inputRef}
@@ -58,7 +54,7 @@ const InputWithLabel = ({
       onChange={onInputChange}
     />
   </div>
-  )
-}
+  );
+};
 
 export default InputWithLabel;

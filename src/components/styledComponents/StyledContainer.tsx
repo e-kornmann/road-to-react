@@ -13,5 +13,6 @@ const StyledContainer = styled.div`
   @media only screen and (${Sv.breakpoints.medium}) {
     padding: 12px 3.4%;
 }
-`
-export default StyledContainer
+`;
+
+export default StyledContainer;

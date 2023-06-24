@@ -19,12 +19,12 @@ const StyledButton = styled.button`
     &: hover > svg {
       fill: white;
   }
+  `;
 
-  `
-const StyledButtonSmall = styled(StyledButton) `    
+const StyledButtonSmall = styled(StyledButton)`    
     margin-left: auto;
-  `
-const StyledButtonLarge = styled(StyledButton) `
+  `;
+const StyledButtonLarge = styled(StyledButton)`
     margin-left: auto;
     position: relative;
     bottom: 10px;
@@ -33,7 +33,6 @@ const StyledButtonLarge = styled(StyledButton) `
     padding: 5px 15px;
     
     
-  `
+  `;
 
 export { StyledButton, StyledButtonLarge, StyledButtonSmall };
-  

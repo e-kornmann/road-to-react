@@ -1,33 +1,33 @@
-import React from "react";
-import { ReactComponent as EkLogo } from "./assets/svgs/ek-logo.svg";
-import axios from "axios";
-import "./App.css";
-import { useStorageState } from "./Hooks/storageState";
-import List from "./components/List";
-import { Article, StorieState } from "./types";
-import { storiesReducer } from "./Hooks/storiesReducer";
-import { API_ENDPOINT } from "./api";
-import SearchForm from "./components/SearchForm";
-import useMediaQuery from "./Hooks/useMediaQuery";
-import StyledHeadline from "./components/styledComponents/StyledHeadline";
-import StyledContainer from "./components/styledComponents/StyledContainer";
-import * as Sv from "./components/styledComponents/StyleVariables";
-import StyledTechTalkLogo from "./components/styledComponents/StyledLogo";
+import React from 'react';
+import axios from 'axios';
+import { ReactComponent as EkLogo } from './assets/svgs/ek-logo.svg';
+import './App.css';
+import { useStorageState } from './Hooks/storageState';
+import List from './components/List';
+import { Article, StorieState } from './types';
+import { storiesReducer } from './Hooks/storiesReducer';
+import API_ENDPOINT from './api';
+import SearchForm from './components/SearchForm';
+import useMediaQuery from './Hooks/useMediaQuery';
+import StyledHeadline from './components/styledComponents/StyledHeadline';
+import StyledContainer from './components/styledComponents/StyledContainer';
+import * as Sv from './components/styledComponents/StyleVariables';
+import StyledTechTalkLogo from './components/styledComponents/StyledLogo';
 
 const getSumComments = (stories: StorieState) => {
-  console.log("C");
-  return stories.data.reduce((result, value) => result + value.num_comments, 0);
+  console.log('C');
+  return stories.data.reduce((result, value) => result + value.numComments, 0);
 };
 
 const App = () => {
   const isMediumDevice = useMediaQuery(
-    `only screen and (${Sv.breakpoints.medium})`
+    `only screen and (${Sv.breakpoints.medium})`,
   );
   const isLargeDevice = useMediaQuery(
-    `only screen and (${Sv.breakpoints.large})`
+    `only screen and (${Sv.breakpoints.large})`,
   );
 
-  const [searchTerm, setSearchTerm] = useStorageState("search", "React");
+  const [searchTerm, setSearchTerm] = useStorageState('search', 'React');
   const [searchQuery, setSearchQuery] = React.useState(searchTerm);
 
   const [articles, dispatchArticles] = React.useReducer(storiesReducer, {
@@ -38,21 +38,21 @@ const App = () => {
 
   const handleFetchStory = React.useCallback(async () => {
     dispatchArticles({
-      type: "STORIES_FETCH_INIT",
+      type: 'STORIES_FETCH_INIT',
     });
     try {
       const result = await axios.get(`${API_ENDPOINT}${searchQuery}`);
       dispatchArticles({
-        type: "STORIES_FETCH_SUCCESS",
+        type: 'STORIES_FETCH_SUCCESS',
         payload: result.data.hits,
       });
     } catch {
-      dispatchArticles({ type: "STORIES_FETCH_FAILURE" });
+      dispatchArticles({ type: 'STORIES_FETCH_FAILURE' });
     }
   }, [searchQuery]);
 
   React.useEffect(() => {
-    console.log("How many times do I log?");
+    console.log('How many times do I log?');
     handleFetchStory();
   }, [handleFetchStory]);
 
@@ -67,7 +67,7 @@ const App = () => {
 
   const handleRemoveStory = React.useCallback((item: Article) => {
     dispatchArticles({
-      type: "REMOVE_STORY",
+      type: 'REMOVE_STORY',
       payload: item,
     });
   }, []);
@@ -83,21 +83,17 @@ const App = () => {
 
   const sumComments = React.useMemo(() => getSumComments(articles), [articles]);
 
-  console.log("B:App");
+  console.log('B:App');
 
   return (
     <StyledContainer>
       <StyledHeadline>
         <span
           style={{
-            fontSize: isLargeDevice
-              ? "1.55rem"
-              : isMediumDevice
-              ? "1.14rem"
-              : undefined,
+            fontSize: isLargeDevice ? '1.55rem' : '1.14rem',
           }}
         >
-          <StyledTechTalkLogo isLargeDevice={isLargeDevice} />{" "}
+          <StyledTechTalkLogo isLargeDevice={isLargeDevice} />{' '}
           <span>tech&#8202;talks.</span>
         </span>
       </StyledHeadline>
@@ -122,7 +118,7 @@ const App = () => {
         <EkLogo
           height="44px"
           width="44px"
-          style={{ float: "right", marginTop: "-6px", marginRight: "-8px" }}
+          style={{ float: 'right', marginTop: '-6px', marginRight: '-8px' }}
         />
       </a>
       <MyComponent />
