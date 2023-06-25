@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
   margin: auto;
   
   @media only screen and (${Sv.breakpoints.medium}) {
-    padding: 12px 3.4%;
+    padding: 12px 3.4% 33px;
 }
 `;
 

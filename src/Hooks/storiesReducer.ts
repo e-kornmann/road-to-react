@@ -1,7 +1,4 @@
-import { 
-  StorieState,
-  StoriesAction,
-} from "../types";
+import { StorieState, StoriesAction } from '../types';
 
 const storiesReducer = (state: StorieState, action: StoriesAction) => {
   switch (action.type) {
@@ -27,13 +24,13 @@ const storiesReducer = (state: StorieState, action: StoriesAction) => {
     case 'REMOVE_STORY':
       return {
         ...state,
-         data: state.data.filter(
-         (story) => action.payload.objectID !== story.objectID
-         ),
-    }
-    default :
+        data: state.data.filter(
+          story => action.payload.objectID !== story.objectID,
+        ),
+      };
+    default:
       throw new Error();
   }
-}
+};
 
-export { storiesReducer }
+export default storiesReducer;

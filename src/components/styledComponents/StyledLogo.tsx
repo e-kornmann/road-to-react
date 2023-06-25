@@ -1,14 +1,14 @@
 import React from 'react';
-import { ReactComponent as TechTalkLogo } from '../../assets/svgs/tech-talk-logo.svg'
+import { ReactComponent as TechTalkLogo } from '../../assets/svgs/tech-talk-logo.svg';
 import { black } from './StyleVariables';
 
 const LogoStyle: React.CSSProperties = {
-    fill: `${black}`,
-    height: '15px',
-    width: '15px',
-    margin: '3px 0 3px 0',
-    position: 'relative',
-    top: '3px',
+  fill: `${black}`,
+  height: '15px',
+  width: '15px',
+  margin: '3px 0 3px 0',
+  position: 'relative',
+  top: '3px',
 };
 
 const LogoStyleMedium: React.CSSProperties = {
@@ -21,13 +21,10 @@ const LogoStyleMedium: React.CSSProperties = {
 };
 
 type Props = {
-  isLargeDevice: boolean
-} 
-
-const StyledTechTalkLogo = ({ isLargeDevice }: Props) => {
-  return (
-      <TechTalkLogo style={ isLargeDevice ? LogoStyle : LogoStyleMedium } />
-  );
+  isLargeDevice: boolean;
 };
+
+const StyledTechTalkLogo = ({ isLargeDevice }: Props) => <TechTalkLogo style={
+  isLargeDevice ? LogoStyle : LogoStyleMedium} />;
 
 export default StyledTechTalkLogo;

@@ -1,10 +1,15 @@
-{
-  "extends": ["salt-typescript"], 
+{ 
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended", "salt-typescript"], 
   "rules": {
     "no-console": "off",
-    "import/extensions": ["error", "never", { "svg": "always" }]
+    "import/extensions": ["error", "never", { "svg": "always" }],
+    "react-refresh/only-export-components": "warn"
   },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh"],
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "project": ["./tsconfig.json"],
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   }
 }

@@ -10,7 +10,8 @@ type ArticleProps = {
 
 const Item = ({ item, onRemoveItem }: ArticleProps) => {
   const {
-    title, url, author, numComments, points,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    title, url, author, num_comments, points,
   } = item;
   return (
     <div className="item">
@@ -23,7 +24,7 @@ const Item = ({ item, onRemoveItem }: ArticleProps) => {
       </span>
       <span style={{ width: '30%' }}>
         Comments: <br />
-        {numComments}
+        {num_comments}
       </span>
       <span style={{ width: '30%' }}>
         Points: <br />

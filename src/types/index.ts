@@ -2,7 +2,7 @@ type Article = {
   title: string,
   url: string,
   author: string,
-  numComments: number,
+  num_comments: number,
   points: number,
   objectID: number,
 };

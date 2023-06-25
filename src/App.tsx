@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { ReactComponent as EkLogo } from './assets/svgs/ek-logo.svg';
 import './App.css';
-import { useStorageState } from './Hooks/storageState';
+import useStorageState from './Hooks/storageState';
 import List from './components/List';
 import { Article, StorieState } from './types';
-import { storiesReducer } from './Hooks/storiesReducer';
+import storiesReducer from './Hooks/storiesReducer';
 import API_ENDPOINT from './api';
 import SearchForm from './components/SearchForm';
 import useMediaQuery from './Hooks/useMediaQuery';
@@ -16,7 +16,7 @@ import StyledTechTalkLogo from './components/styledComponents/StyledLogo';
 
 const getSumComments = (stories: StorieState) => {
   console.log('C');
-  return stories.data.reduce((result, value) => result + value.numComments, 0);
+  return stories.data.reduce((result, value) => result + value.num_comments, 0);
 };
 
 const App = () => {
@@ -72,16 +72,17 @@ const App = () => {
     });
   }, []);
 
-  const MyComponent = () => {
+  const MyUseRefComponent = () => {
     const clickCountRef = React.useRef(0);
     const handleClick = () => {
       clickCountRef.current += 1;
       console.log(`Button clicked ${clickCountRef.current} times.`);
     };
-    return <button onClick={handleClick}>Click me</button>;
+    return <div onClick={handleClick}>&nbsp;</div>;
   };
 
   const sumComments = React.useMemo(() => getSumComments(articles), [articles]);
+  console.log(`My Hacker Stories with ${sumComments} comments.`);
 
   console.log('B:App');
 
@@ -121,9 +122,8 @@ const App = () => {
           style={{ float: 'right', marginTop: '-6px', marginRight: '-8px' }}
         />
       </a>
-      <MyComponent />
-      <h1>My Hacker Stories with {sumComments} comments.</h1>
-    </StyledContainer>
+      <MyUseRefComponent />
+     </StyledContainer>
   );
 };
 
