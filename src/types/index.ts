@@ -7,7 +7,7 @@ type Article = {
   objectID: number,
 };
 
-  type StorieState = {
+  type StoriesState = {
     data: Article[]
     isLoading: boolean,
     isError: boolean,
@@ -39,7 +39,7 @@ type Article = {
 
 export type {
   Article,
-  StorieState,
+  StoriesState,
   StoriesFetchSuccessAction,
   StoriesFetchFailureAction,
   StoriesRemoveAction,

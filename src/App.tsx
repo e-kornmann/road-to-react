@@ -4,7 +4,7 @@ import { ReactComponent as EkLogo } from './assets/svgs/ek-logo.svg';
 import './App.css';
 import useStorageState from './Hooks/storageState';
 import List from './components/List';
-import { Article, StorieState } from './types';
+import { Article, StoriesState } from './types';
 import storiesReducer from './Hooks/storiesReducer';
 import API_ENDPOINT from './api';
 import SearchForm from './components/SearchForm';
@@ -14,7 +14,7 @@ import StyledContainer from './components/styledComponents/StyledContainer';
 import * as Sv from './components/styledComponents/StyleVariables';
 import StyledTechTalkLogo from './components/styledComponents/StyledLogo';
 
-const getSumComments = (stories: StorieState) => {
+const getSumComments = (stories: StoriesState) => {
   console.log('C');
   return stories.data.reduce((result, value) => result + value.num_comments, 0);
 };

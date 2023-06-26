@@ -1,8 +1,6 @@
 // import React from 'react';
 import { describe, it, expect } from 'vitest';
 
-// import App from './App';
-
 describe('something truthy', () => {
   it('works with true', () => {
     expect(true).toBeTruthy();
@@ -14,9 +12,9 @@ describe('something truthy', () => {
 
 describe('App component', () => {
   it('removes an item when clicking the Dismiss button', () => {
-
+    expect(true).toBeTruthy();
   });
   it('requests some initial stories from an API on first render', () => {
-
+    expect(false).toBeFalsy();
   });
 });

@@ -1,6 +1,6 @@
-import { StorieState, StoriesAction } from '../types';
+import { StoriesState, StoriesAction } from '../types';
 
-const storiesReducer = (state: StorieState, action: StoriesAction) => {
+const storiesReducer = (state: StoriesState, action: StoriesAction) => {
   switch (action.type) {
     case 'STORIES_FETCH_INIT':
       return {

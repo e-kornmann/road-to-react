@@ -8,6 +8,6 @@ const crossIconStyle: React.CSSProperties = {
   marginLeft: '3px',
 };
 
-const CrossIcon = () => <Cross style={crossIconStyle} />;
+const CrossIcon = () => <Cross data-testid="dismiss-icon" style={crossIconStyle} />;
 
 export default CrossIcon;
