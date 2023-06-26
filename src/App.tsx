@@ -56,7 +56,7 @@ const App = () => {
     handleFetchStory();
   }, [handleFetchStory]);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
@@ -100,8 +100,8 @@ const App = () => {
       </StyledHeadline>
       <SearchForm
         searchTerm={searchTerm}
-        handleSearch={handleSearch}
-        handleSearchSubmit={handleSearchSubmit}
+        onSearchInput={handleInput}
+        onSearchSubmit={handleSearchSubmit}
         isMediumDevice={isMediumDevice}
       />
       {articles.isError && <p>Something went wrong</p>}

@@ -3,34 +3,34 @@ import InputWithLabel from './InputWithLabel';
 import StyledSearchForm from './styledComponents/StyledSearchForm';
 import * as S from './styledComponents/StyledButtons';
 
-type SearchFormProps = {
+export type SearchFormProps = {
   searchTerm: string;
-  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   isMediumDevice: boolean;
 };
 
 const SearchForm = ({
   searchTerm,
-  handleSearch,
-  handleSearchSubmit,
+  onSearchInput,
+  onSearchSubmit,
   isMediumDevice,
 }: SearchFormProps) => (
-    <StyledSearchForm onSubmit={handleSearchSubmit}>
+    <StyledSearchForm onSubmit={onSearchSubmit}>
       <InputWithLabel
         id="search"
         value={searchTerm}
         isFocused
-        onInputChange={handleSearch}
+        onInputChange={onSearchInput}
       >
         <span>Search:</span>
       </InputWithLabel>
       {isMediumDevice ? (
-        <S.StyledButtonSmall type="submit" disabled={!searchTerm}>
+        <S.StyledButtonSmall data-testid="submit-button-small" type="submit" disabled={!searchTerm}>
           Submit
         </S.StyledButtonSmall>
       ) : (
-        <S.StyledButtonLarge type="submit" disabled={!searchTerm}>
+        <S.StyledButtonLarge data-testid="submit-button-large" type="submit" disabled={!searchTerm}>
           Submit
         </S.StyledButtonLarge>
       )}
