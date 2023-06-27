@@ -8,7 +8,6 @@ import {
   render,
   screen,
   fireEvent,
-  // waitFor,
 } from '@testing-library/react';
 import SearchForm, { SearchFormProps } from './SearchForm';
 
