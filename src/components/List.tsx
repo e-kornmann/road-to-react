@@ -1,10 +1,7 @@
 import React from 'react';
 import { Article } from '../types';
 import Item from './Item';
-import {
-  StyledArticlesMedium,
-  StyledArticlesLarge,
-} from './styledComponents/StyledArticles';
+import StyledArticles from './styledComponents/StyledArticles';
 
 type ListProps = {
   list: Article[];
@@ -15,14 +12,13 @@ type ListProps = {
 
 const List = React.memo(
   ({
-    list, onRemoveItem, isMediumDevice, isLargeDevice,
+    list, onRemoveItem,
   }: ListProps) => {
     console.log('B:List');
 
     return (
       <>
-        {isMediumDevice && (
-          <StyledArticlesMedium>
+          <StyledArticles>
             {list.map((item: Article) => (
               <Item
                 key={item.objectID}
@@ -30,20 +26,7 @@ const List = React.memo(
                 onRemoveItem={onRemoveItem}
               />
             ))}
-          </StyledArticlesMedium>
-        )}
-
-        {isLargeDevice && (
-          <StyledArticlesLarge>
-            {list.map((item: Article) => (
-              <Item
-                key={item.objectID}
-                item={item}
-                onRemoveItem={onRemoveItem}
-              />
-            ))}
-          </StyledArticlesLarge>
-        )}
+          </StyledArticles>
       </>
     );
   },

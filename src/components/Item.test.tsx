@@ -8,7 +8,6 @@ import {
   render,
   screen,
   fireEvent,
-  // waitFor,
 } from '@testing-library/react';
 import Item from './Item';
 import { storyOne } from '../../tests/fakeData';

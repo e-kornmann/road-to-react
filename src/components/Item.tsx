@@ -14,7 +14,7 @@ const Item = ({ item, onRemoveItem }: ArticleProps) => {
     title, url, author, num_comments, points,
   } = item;
   return (
-    <div className="item">
+    <div className="item" data-testid="item">
       <div className="title">
         <a href={url}>{title}</a>
       </div>

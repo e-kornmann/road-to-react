@@ -26,7 +26,6 @@ const App = () => {
   const isLargeDevice = useMediaQuery(
     `only screen and (${Sv.breakpoints.large})`,
   );
-
   const [searchTerm, setSearchTerm] = useStorageState('search', 'React');
   const [searchQuery, setSearchQuery] = React.useState(searchTerm);
 
