@@ -9,7 +9,8 @@ import {
   screen,
   fireEvent,
 } from '@testing-library/react';
-import SearchForm, { SearchFormProps } from './SearchForm';
+import SearchForm from '../SearchForm';
+import { SearchFormProps } from './types';
 
 describe('SearchForm', () => {
   const searchProps: SearchFormProps = {
@@ -63,7 +64,7 @@ describe('SearchForm', () => {
     expect(searchProps.onSearchSubmit).toHaveBeenCalledWith(expect.anything());
   });
 
-  it.only('renders snapshot', () => {
+  it('renders snapshot', () => {
     const { container } = render(<SearchForm {...searchProps} />);
     expect(container.firstChild).toMatchSnapshot();
   });

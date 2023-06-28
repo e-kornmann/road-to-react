@@ -7,6 +7,6 @@ export const breakpoints = {
 
 export const black = '#171212';
 
-export const BlackText = css`
+export const blackText = css`
   color: ${black};
 `;

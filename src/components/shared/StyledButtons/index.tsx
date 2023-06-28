@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as Sv from './StyleVariables';
+import * as Sv from '../StyleVariables';
 
 const StyledButton = styled.button`
   fill: ${Sv.black};

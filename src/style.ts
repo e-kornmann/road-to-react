@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import * as Sv from './StyleVariables';
+import * as Sv from './components/shared/StyleVariables';
 
-const StyledContainer = styled.div`
+const Container = styled.div`
   min-height: 100vh;
   width: 80vw;
   max-width: 1265px;
   padding: 15px 1.3% 40px;
   background: #ced3db;
-  ${Sv.BlackText}
+  ${Sv.blackText}
   margin: auto;
   
   @media only screen and (${Sv.breakpoints.medium}) {
@@ -15,4 +15,10 @@ const StyledContainer = styled.div`
 }
 `;
 
-export default StyledContainer;
+const Headline = styled.div`
+  font-family: 'Helvetica Textbook Bold';
+  font-weight: normal;
+  }
+`;
+
+export { Container, Headline };

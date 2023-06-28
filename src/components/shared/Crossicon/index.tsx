@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Cross } from '../../assets/svgs/cross.svg';
+import { ReactComponent as Cross } from '../../../assets/svgs/cross.svg';
 
 const crossIconStyle: React.CSSProperties = {
   height: '14px',

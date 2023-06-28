@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import * as Sv from './styledComponents/StyleVariables';
+import * as Sv from '../../shared/StyleVariables';
 
 type InputWithLabelProps = {
   id: string,
@@ -14,7 +14,7 @@ type InputWithLabelProps = {
 const StyledLabel = styled.label`
   fontFamily: Helvetica Textbook Bold;
   font-size: 14px;
-  ${Sv.BlackText}
+  ${Sv.blackText}
   width: 300px;
   padding-right: 20px;
 `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { ReactComponent as EkLogo } from './assets/svgs/ek-logo.svg';
-import './App.css';
+import './css/App.css';
 import useStorageState from './Hooks/storageState';
 import List from './components/List';
 import { Article, StoriesState } from './types';
@@ -9,10 +9,9 @@ import storiesReducer from './Hooks/storiesReducer';
 import API_ENDPOINT from './api';
 import SearchForm from './components/SearchForm';
 import useMediaQuery from './Hooks/useMediaQuery';
-import StyledHeadline from './components/styledComponents/StyledHeadline';
-import StyledContainer from './components/styledComponents/StyledContainer';
-import * as Sv from './components/styledComponents/StyleVariables';
-import StyledTechTalkLogo from './components/styledComponents/StyledLogo';
+import * as S from './style';
+import * as Sv from './components/shared/StyleVariables';
+import TechTalkLogo from './components/Logo';
 
 const getSumComments = (stories: StoriesState) => {
   console.log('C');
@@ -86,17 +85,17 @@ const App = () => {
   console.log('B:App');
 
   return (
-    <StyledContainer>
-      <StyledHeadline>
+    <S.Container>
+      <S.Headline>
         <span
           style={{
             fontSize: isLargeDevice ? '1.55rem' : '1.14rem',
           }}
         >
-          <StyledTechTalkLogo isLargeDevice={isLargeDevice} />{' '}
+          <TechTalkLogo isLargeDevice={isLargeDevice} />{' '}
           <span>tech&#8202;talks.</span>
         </span>
-      </StyledHeadline>
+      </S.Headline>
       <SearchForm
         searchTerm={searchTerm}
         onSearchInput={handleInput}
@@ -122,7 +121,7 @@ const App = () => {
         />
       </a>
       <MyUseRefComponent />
-     </StyledContainer>
+     </S.Container>
   );
 };
 

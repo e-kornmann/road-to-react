@@ -1,12 +1,7 @@
-import { Article } from '../types';
-import './item.css';
-import { StyledButtonSmall } from './styledComponents/StyledButtons';
-import CrossIcon from './styledComponents/StyledCrossIcon';
-
-type ArticleProps = {
-  item: Article;
-  onRemoveItem: (item: Article) => void;
-};
+import './style.css';
+import { StyledButtonSmall } from '../../shared/StyledButtons';
+import CrossIcon from '../../shared/Crossicon';
+import { ArticleProps } from './types';
 
 const Item = ({ item, onRemoveItem }: ArticleProps) => {
   const {

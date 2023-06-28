@@ -1,6 +1,7 @@
 import React from 'react';
-import { ReactComponent as TechTalkLogo } from '../../assets/svgs/tech-talk-logo.svg';
-import { black } from './StyleVariables';
+import { ReactComponent as TTLogo } from '../../assets/svgs/tech-talk-logo.svg';
+import { black } from '../shared/StyleVariables';
+import { Props } from './types';
 
 const LogoStyle: React.CSSProperties = {
   fill: `${black}`,
@@ -20,11 +21,7 @@ const LogoStyleMedium: React.CSSProperties = {
   top: '3px',
 };
 
-type Props = {
-  isLargeDevice: boolean;
-};
-
-const StyledTechTalkLogo = ({ isLargeDevice }: Props) => <TechTalkLogo style={
+const TechTalkLogo = ({ isLargeDevice }: Props) => <TTLogo style={
   isLargeDevice ? LogoStyle : LogoStyleMedium} />;
 
-export default StyledTechTalkLogo;
+export default TechTalkLogo;

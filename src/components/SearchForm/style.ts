@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as Sv from './StyleVariables';
+import * as Sv from '../shared/StyleVariables';
 
 const StyledSearchForm = styled.form`
   display: flex;

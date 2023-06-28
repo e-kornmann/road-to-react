@@ -9,8 +9,8 @@ import {
   screen,
   fireEvent,
 } from '@testing-library/react';
-import Item from './Item';
-import { storyOne } from '../../tests/fakeData';
+import Item from '.';
+import { storyOne } from '../../../../tests/fakeData';
 
 describe('item', () => {
   it('renders all properties', () => {
