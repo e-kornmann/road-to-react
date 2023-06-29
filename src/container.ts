@@ -6,7 +6,7 @@ const Container = styled.div`
   width: 80vw;
   max-width: 1265px;
   padding: 15px 1.3% 40px;
-  background: #ced3db;
+  background:  ${Sv.iron};
   ${Sv.blackText}
   margin: auto;
   

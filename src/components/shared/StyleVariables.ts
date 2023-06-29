@@ -7,6 +7,8 @@ export const breakpoints = {
 
 export const black = '#171212';
 
+export const iron = '#ced3db';
+
 export const blackText = css`
   color: ${black};
 `;

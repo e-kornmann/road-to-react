@@ -1,15 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import * as Sv from '../../shared/StyleVariables';
-
-type InputWithLabelProps = {
-  id: string,
-  value: string,
-  type?: string;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isFocused?: boolean;
-  children: React.ReactNode,
-};
+import { InputWithLabelProps } from './types';
 
 const StyledLabel = styled.label`
   fontFamily: Helvetica Textbook Bold;
@@ -35,9 +27,9 @@ const InputWithLabel = ({
   isFocused,
   children,
 }: InputWithLabelProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isFocused && inputRef.current) {
       inputRef.current.focus();
     }

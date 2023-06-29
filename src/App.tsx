@@ -9,14 +9,12 @@ import storiesReducer from './Hooks/storiesReducer';
 import API_ENDPOINT from './api';
 import SearchForm from './components/SearchForm';
 import useMediaQuery from './Hooks/useMediaQuery';
-import * as S from './style';
+import * as S from './container';
 import * as Sv from './components/shared/StyleVariables';
 import TechTalkLogo from './components/Logo';
 
-const getSumComments = (stories: StoriesState) => {
-  console.log('C');
-  return stories.data.reduce((result, value) => result + value.num_comments, 0);
-};
+const getSumComments = (stories: StoriesState) => stories.data
+  .reduce((result, value) => result + value.num_comments, 0);
 
 const App = () => {
   const isMediumDevice = useMediaQuery(
@@ -50,7 +48,6 @@ const App = () => {
   }, [searchQuery]);
 
   React.useEffect(() => {
-    console.log('How many times do I log?');
     handleFetchStory();
   }, [handleFetchStory]);
 
@@ -82,19 +79,12 @@ const App = () => {
   const sumComments = React.useMemo(() => getSumComments(articles), [articles]);
   console.log(`My Hacker Stories with ${sumComments} comments.`);
 
-  console.log('B:App');
+  console.log('App render');
 
   return (
     <S.Container>
-      <S.Headline>
-        <span
-          style={{
-            fontSize: isLargeDevice ? '1.55rem' : '1.14rem',
-          }}
-        >
-          <TechTalkLogo isLargeDevice={isLargeDevice} />{' '}
-          <span>tech&#8202;talks.</span>
-        </span>
+      <S.Headline style={{ fontSize: isLargeDevice ? '1.55rem' : '1.14rem' }}>
+      <TechTalkLogo isLargeDevice={isLargeDevice} />&#8202;tech&#8202;talks.
       </S.Headline>
       <SearchForm
         searchTerm={searchTerm}

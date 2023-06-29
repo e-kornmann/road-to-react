@@ -1,16 +1,16 @@
 type Article = {
-  title: string,
-  url: string,
-  author: string,
-  num_comments: number,
-  points: number,
-  objectID: number,
+  title: string;
+  url: string;
+  author: string;
+  num_comments: number;
+  points: number;
+  objectID: number;
 };
 
   type StoriesState = {
-    data: Article[]
-    isLoading: boolean,
-    isError: boolean,
+    data: Article[];
+    isLoading: boolean;
+    isError: boolean;
   };
 
   type StoriesFetchInitAction = {
