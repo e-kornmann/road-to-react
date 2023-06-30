@@ -17,6 +17,7 @@ const UpDownIcon = ({ isReversedOrder, isActive, isMediumDevice }: Props) => {
     float: 'right',
     display: isActive ? 'block' : 'none',
     rotate: isMediumDevice ? rotate : '90deg',
+
   };
   return <Arrow style={iconStyle} />;
 };

@@ -10,6 +10,7 @@ const StyledSearchForm = styled.form`
   margin: 40px auto;
   width: 70%;
 
+
   @media only screen and (${Sv.breakpoints.medium}) {
     width: 100%;
   }

@@ -1,0 +1,27 @@
+.last-five-searches-mapper {
+    display: flex;
+    position: relative;
+    top: -40px;
+    height: 0px;
+    width: 70%;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    background-color: rgba(228, 233, 239, 0.916);
+  
+    @media only screen and (max-width : 992px) {
+      width: 100%;
+    }
+
+}
+
+.last-five-searches-mapper__mappingelement {
+    width: 100%;
+    display: inherit;
+    cursor: pointer;
+    padding: 13px;
+    background-color: rgba(228, 233, 239, 0.916);
+    &:hover {
+        background-color: rgb(120, 118, 125);
+    }
+}

@@ -26,6 +26,7 @@ const InputWithLabel = ({
   onInputChange,
   isFocused,
   children,
+  hide,
 }: InputWithLabelProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -36,7 +37,7 @@ const InputWithLabel = ({
   }, [isFocused]);
 
   return (
-  <div style={{ width: '90%', lineHeight: '20px' }}>
+  <div style={{ width: '100%', lineHeight: '20px' }}>
     <StyledLabel htmlFor={id}>{children}</StyledLabel>
     <StyledInput
       ref={inputRef}
@@ -44,6 +45,8 @@ const InputWithLabel = ({
       type={type}
       value={value}
       onChange={onInputChange}
+      autoComplete="off"
+      onClick={hide}
     />
   </div>
   );

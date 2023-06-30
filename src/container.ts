@@ -9,6 +9,7 @@ const Container = styled.div`
   background:  ${Sv.iron};
   ${Sv.blackText}
   margin: auto;
+  border: 1px solid black;
   
   @media only screen and (${Sv.breakpoints.medium}) {
     padding: 12px 3.4% 33px;

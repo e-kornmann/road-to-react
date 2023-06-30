@@ -3,4 +3,5 @@ export type SearchFormProps = {
   onSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   isMediumDevice: boolean;
+  hide: ()=>void;
 };

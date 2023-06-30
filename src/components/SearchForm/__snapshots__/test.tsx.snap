@@ -2,10 +2,10 @@
 
 exports[`SearchForm > renders snapshot 1`] = `
 <form
-  class="sc-hVvQAm giEpPw"
+  class="sc-hVvQAm njtLC"
 >
   <div
-    style="width: 90%; line-height: 20px;"
+    style="width: 100%; line-height: 20px;"
   >
     <label
       class="sc-jzuGiw laxkdV"
@@ -16,6 +16,7 @@ exports[`SearchForm > renders snapshot 1`] = `
       </span>
     </label>
     <input
+      autocomplete="off"
       class="sc-kIDzkD cZhMWN"
       id="search"
       type="text"

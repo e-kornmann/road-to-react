@@ -12,9 +12,15 @@ import useMediaQuery from './Hooks/useMediaQuery';
 import * as S from './container';
 import * as Sv from './components/shared/StyleVariables';
 import TechTalkLogo from './components/Logo';
+import LastFiveSearches from './components/LastFiveSearches';
 
 const getSumComments = (stories: StoriesState) => stories.data
   .reduce((result, value) => result + value.num_comments, 0);
+
+const getLastFiveSearches = (queries: string[]): string[] => {
+  const uniqueQueries = [...new Set(queries)];
+  return uniqueQueries.slice(-5).slice(0, -1);
+};
 
 const App = () => {
   const isMediumDevice = useMediaQuery(
@@ -24,7 +30,8 @@ const App = () => {
     `only screen and (${Sv.breakpoints.large})`,
   );
   const [searchTerm, setSearchTerm] = useStorageState('search', 'React');
-  const [searchQuery, setSearchQuery] = React.useState(searchTerm);
+  const [queryArray, setQueryArray] = React.useState([searchTerm]);
+  const [hide, setHide] = React.useState(true);
 
   const [articles, dispatchArticles] = React.useReducer(storiesReducer, {
     data: [],
@@ -32,12 +39,24 @@ const App = () => {
     isError: false,
   });
 
-  const handleFetchStory = React.useCallback(async () => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHide(true);
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setHide(true);
+    setQueryArray(queryArray.concat(searchTerm));
+    event.preventDefault();
+  };
+
+  const handleFetchLastQuery = React.useCallback(async () => {
     dispatchArticles({
       type: 'STORIES_FETCH_INIT',
     });
     try {
-      const result = await axios.get(`${API_ENDPOINT}${searchQuery}`);
+      const lastQuery = queryArray[queryArray.length - 1];
+      const result = await axios.get(`${API_ENDPOINT}${lastQuery}`);
       dispatchArticles({
         type: 'STORIES_FETCH_SUCCESS',
         payload: result.data.hits,
@@ -45,19 +64,22 @@ const App = () => {
     } catch {
       dispatchArticles({ type: 'STORIES_FETCH_FAILURE' });
     }
-  }, [searchQuery]);
+  }, [queryArray]);
 
   React.useEffect(() => {
-    handleFetchStory();
-  }, [handleFetchStory]);
+    handleFetchLastQuery();
+  }, [handleFetchLastQuery]);
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+  const lastFiveSearches = getLastFiveSearches(queryArray);
+
+  const clickToggler = () => {
+    setHide(!hide);
   };
 
-  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    setSearchQuery(searchTerm);
-    event.preventDefault();
+  const updateStates = (query:string): void => {
+    setHide(true);
+    setSearchTerm(query);
+    setQueryArray(queryArray.concat(query));
   };
 
   const handleRemoveStory = React.useCallback((item: Article) => {
@@ -80,19 +102,28 @@ const App = () => {
   console.log(`My Hacker Stories with ${sumComments} comments.`);
 
   console.log('App render');
+  console.log(`searchqueryState: ${queryArray}`);
+  console.log(`lastFiveSearches: ${lastFiveSearches}`);
 
   return (
+    <>
     <S.Container>
       <S.Headline style={{ fontSize: isLargeDevice ? '1.55rem' : '1.14rem' }}>
       <TechTalkLogo isLargeDevice={isLargeDevice} />&#8202;tech&#8202;talks.
       </S.Headline>
+      <div style={{ width: '90%', margin: '0 auto' }}>
       <SearchForm
         searchTerm={searchTerm}
         onSearchInput={handleInput}
         onSearchSubmit={handleSearchSubmit}
         isMediumDevice={isMediumDevice}
+        hide={clickToggler}
       />
-      {articles.isError && <p>Something went wrong</p>}
+
+    <LastFiveSearches lastFiveSearches={lastFiveSearches} clickHandler={updateStates} hide={hide} />
+    </div>
+
+    {articles.isError && <p>Something went wrong</p>}
       {articles.isLoading ? (
         <p>Loading ...</p>
       ) : (
@@ -112,6 +143,7 @@ const App = () => {
       </a>
       <MyUseRefComponent />
      </S.Container>
+     </>
   );
 };
 

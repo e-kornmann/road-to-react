@@ -1,4 +1,3 @@
-// import styled from 'styled-components';
 import styled from 'styled-components';
 import { SortProps } from './types';
 import SortButton from './SortButton';
@@ -18,15 +17,8 @@ const Container = styled.div`
   font-size: 11px;
   margin: 0 0 20px -3px; 
 
-  &::before {
-    content: 'Sort by /';
-    position: absolute;
-  
-    top: -10px;
-    left: 4px;
-  }
-
   @media only screen and (max-width: 400px) {
+    width: 80%;
     height: 60px;
   }
 `;
@@ -37,39 +29,43 @@ type DynamicSorterProps = {
 
 const DynamicSorter = styled.div<DynamicSorterProps>`
   display: ${props => props.$flex};
-  position: absolute;
+  position: absolute;  
   cursor: pointer;
-  margin: 0 0 0 -65px;
+  top: 194px;
+  margin: 12px 0 0;
+  right: 12.75%;
+  width: 15px;
+  height: 15px;
+  align-self: flex-end;
+  justify-self: flex-end;
+  align-items: center;
+  font-size: 0.88em;
+  z-index: 3;
+
+  @media only screen and (max-width: 400px) {
+
+    top: 194px;
+  
+  }
+    
+  @media only screen and (min-width: 401px) and (max-width: 564px) {
+    top: 172px;
+  }
+
+  @media only screen and (min-width: 565px) and (${Sv.breakpoints.medium}) {
+    top: 155px;
+  }
+
+ @media only screen and (${Sv.breakpoints.large}) {
+  
+  top: 160px;
+  right: inherit;
+  margin: 0 0 0  -66px;
   width: 50px;
   height: 44px;
   text-decoration: none;
   color: ${Sv.iron};
-  font-size: 0.88em;
-  align-items: center;
-  justify-self: flex-end;
-  z-index: 3;
   flex-direction: ${props => props.$direction};
-
-  
-  @media only screen and (${Sv.breakpoints.medium}) {
-    position: none;
-    top: 150px;
-    margin: 12px 0 0;
-    right: 11.75%;
-    width: 25px;
-    height: 25px;
-    align-self: flex-end;
-  
-  
-    @media only screen and (max-width: 400px) {
-      top: 174px;
-    }
-    
-  @media only screen and (max-width: 400px) {
-    top: 174px;
-  }
-
-
   }
   `;
 
@@ -83,6 +79,12 @@ const SortContainer = ({
   const showLetter = (letter: string): string => (!isMediumDevice ? letter : '');
   return (
     <>
+      <span style={ {
+        width: '100%',
+        margin: '0 0 0 3px',
+        lineHeight: '15px',
+        fontSize: '10px',
+      } }> Sort by</span>
 
       <Container >
         <SortButton $textdeco={isActive('TITLE') ? 'aqua' : 'transparent'} onClick={() => clickHandler('TITLE')}>TITLE</SortButton>

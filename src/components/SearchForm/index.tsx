@@ -8,6 +8,7 @@ const SearchForm = ({
   onSearchInput,
   onSearchSubmit,
   isMediumDevice,
+  hide,
 }: SearchFormProps) => (
     <StyledSearchForm onSubmit={onSearchSubmit}>
       <InputWithLabel
@@ -15,6 +16,7 @@ const SearchForm = ({
         value={searchTerm}
         isFocused
         onInputChange={onSearchInput}
+        hide={hide}
       >
         <span>Search:</span>
       </InputWithLabel>
