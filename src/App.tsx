@@ -18,8 +18,9 @@ const getSumComments = (stories: StoriesState) => stories.data
   .reduce((result, value) => result + value.num_comments, 0);
 
 const getLastFiveSearches = (queries: string[]): string[] => {
-  const uniqueQueries = [...new Set(queries)];
-  return uniqueQueries.slice(-5).slice(0, -1);
+  const arrayOfFive = queries.slice(-5);
+  const uniqueQueries = [...new Set(arrayOfFive)];
+  return uniqueQueries.reverse();
 };
 
 const App = () => {

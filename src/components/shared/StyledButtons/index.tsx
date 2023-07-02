@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   padding: 5px 0px;
   cursor: pointer;
   transition: all 0, 1s ease-in;
-  align-self: flex-end;
+  justify-self: flex-end;
 
   &: hover {
     background: ${Sv.black};
@@ -20,9 +20,6 @@ const StyledButton = styled.button`
   }
 `;
 
-const StyledButtonSmall = styled(StyledButton)`
-  margin-left: auto;
-`;
 const StyledButtonLarge = styled(StyledButton)`
   margin-left: auto;
   position: relative;
@@ -32,4 +29,4 @@ const StyledButtonLarge = styled(StyledButton)`
   padding: 5px 15px;
 `;
 
-export { StyledButton, StyledButtonLarge, StyledButtonSmall };
+export { StyledButton, StyledButtonLarge };

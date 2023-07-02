@@ -21,9 +21,9 @@ const SearchForm = ({
         <span>Search:</span>
       </InputWithLabel>
       {isMediumDevice ? (
-        <S.StyledButtonSmall data-testid="submit-button-small" type="submit" disabled={!searchTerm}>
+        <S.StyledButton data-testid="submit-button-small" type="submit" disabled={!searchTerm}>
           Submit
-        </S.StyledButtonSmall>
+        </S.StyledButton>
       ) : (
         <S.StyledButtonLarge data-testid="submit-button-large" type="submit" disabled={!searchTerm}>
           Submit

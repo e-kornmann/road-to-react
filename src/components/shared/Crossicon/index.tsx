@@ -2,10 +2,9 @@ import React from 'react';
 import { ReactComponent as Cross } from '../../../assets/svgs/cross.svg';
 
 const crossIconStyle: React.CSSProperties = {
-  height: '14px',
-  width: '14px',
-  marginBottom: '-2px',
-  marginLeft: '3px',
+  height: '18px',
+  width: '18px',
+  marginBottom: '-4px',
 };
 
 const CrossIcon = () => <Cross data-testid="dismiss-icon" style={crossIconStyle} />;

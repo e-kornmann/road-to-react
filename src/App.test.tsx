@@ -54,9 +54,9 @@ describe('App', () => {
 
     await waitFor(async () => promise);
     expect(screen.queryByText(/Loading/)).not.toBeInTheDocument();
-    expect(screen.getByText('React')).toBeInTheDocument();
-    expect(screen.getByText('Redux')).toBeInTheDocument();
-    expect(screen.getAllByText('Dismiss').length).toBe(2);
+    expect(screen.getByRole('link', { name: 'React' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Redux' })).toBeInTheDocument();
+    expect(screen.getAllByTestId('item').length).toBe(2);
   });
 
   it('displays error when fetching data fails', async () => {
@@ -72,7 +72,7 @@ describe('App', () => {
     }
   });
 
-  it('removes a story when clicking on dismiss button', async () => {
+  it('removes a story when clicking on cross button', async () => {
     const promise = Promise.resolve({
       data: {
         hits: [storyOne, storyTwo],
@@ -81,11 +81,11 @@ describe('App', () => {
     (axios.get as jest.Mock).mockImplementationOnce(() => promise);
     render(<App />);
     await waitFor(async () => promise);
-    expect(screen.getAllByText('Dismiss').length).toBe(2);
+    expect(screen.getAllByTestId('item').length).toBe(2);
     expect(screen.getByText(/jordan Walke/i)).toBeInTheDocument();
 
-    fireEvent.click(screen.getAllByText('Dismiss')[0]);
-    expect(screen.getAllByText('Dismiss').length).toBe(1);
+    fireEvent.click(screen.getAllByTestId('dismiss-icon')[0]);
+    expect(screen.getAllByTestId('item').length).toBe(1);
     expect(screen.queryByText(/jordan/i)).not.toBeInTheDocument();
   });
 
@@ -102,6 +102,7 @@ describe('App', () => {
       num_comments: 15,
       points: 10,
       objectID: 3,
+      created_at: '2008-10-09T18:21:51.000Z',
     };
     const javascriptPromise = Promise.resolve({
       data: {

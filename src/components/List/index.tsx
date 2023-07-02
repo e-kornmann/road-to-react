@@ -2,16 +2,18 @@ import React from 'react';
 import { capitalize, sortBy } from 'lodash';
 import { Article } from '../../types';
 import Item from './Item';
-import Articles from './style';
+import StyledArticles from './StyledArticles';
 import { ListProps } from './types';
 import SortContainer from './Sort';
 
 const SORTS: { [key: string]: (list: Article[]) => Article[] } = {
-  NONE: (list: Article[]) => list,
+  NONE: (list: Article[]) => sortBy(list, item => capitalize(item.created_at)).reverse(),
   TITLE: (list: Article[]) => sortBy(list, item => capitalize(item.title)),
   AUTHOR: (list: Article[]) => sortBy(list, item => capitalize(item.author)),
   COMMENTS: (list: Article[]) => sortBy(list, item => item.num_comments).reverse(),
   POINTS: (list: Article[]) => sortBy(list, item => item.points).reverse(),
+  DATE: (list: Article[]) => sortBy(list, item => capitalize(item.created_at)).reverse(),
+
 };
 
 const List = React.memo(({ list, onRemoveItem, isMediumDevice }: ListProps) => {
@@ -38,15 +40,16 @@ const List = React.memo(({ list, onRemoveItem, isMediumDevice }: ListProps) => {
           clickHandler={clickHandler}
           isReversedOrder={sort.isReversedOrder}
           isMediumDevice={isMediumDevice} />
-          <Articles>
+          <StyledArticles>
             {sortedList.map((item: Article) => (
               <Item
                 key={item.objectID}
                 item={item}
                 onRemoveItem={onRemoveItem}
+                isMediumDevice={isMediumDevice}
               />
             ))}
-          </Articles>
+          </StyledArticles>
       </>
   );
 });

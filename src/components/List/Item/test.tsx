@@ -15,8 +15,8 @@ import { storyOne } from '../../../../tests/fakeData';
 describe('item', () => {
   it('renders all properties', () => {
     render(<Item item={storyOne} onRemoveItem={() => null}/>);
-    expect(screen.getByText((content, element) => content.includes('Jordan Walke') && element?.tagName.toLowerCase() === 'span')).toBeInTheDocument();
-    expect(screen.getByText('React')).toHaveAttribute(
+    expect(screen.getByText((content, element) => content.includes('Jordan Walke') && element?.tagName === 'DIV')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'React' })).toHaveAttribute(
       'href',
       'https://reactjs.org/',
     );
@@ -25,7 +25,6 @@ describe('item', () => {
   it('renders a clickable dismiss button with text and SVG icon', () => {
     render(<Item item={storyOne} onRemoveItem={() => null} />);
     expect(screen.getByRole('button')).toBeInTheDocument();
-    expect(screen.getByText('Dismiss')).toBeInTheDocument();
     expect(screen.getByTestId('dismiss-icon')).toBeInTheDocument();
   });
 

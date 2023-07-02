@@ -5,6 +5,7 @@ type Article = {
   num_comments: number;
   points: number;
   objectID: number;
+  created_at: string;
 };
 
   type StoriesState = {

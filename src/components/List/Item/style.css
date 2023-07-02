@@ -18,11 +18,49 @@
   }
   
   .title > a {
-    color: inherit;  
+    color: inherit;
+    &:hover {
+      color:  rgba(0, 0, 255);
+    }  
+
   }
   
   .author {
-    margin: 8px 0 20px;
-    line-height: 25px;;
+    width: 100%;
+     position: relative;
+     margin: 30px 0 18px;
+    &::before {
+    content: '—';
+    position: absolute;
+    top: -20px;
+    }
+
   }
+  
+
+    
+  .subInfo {
+    display: flex;
+    width: 100px;
+    line-height: 15px;
+    margin-bottom: 15px;
+  }
+
+
+
+  .crossicon {
+    fill: #171212;
+    background: transparent;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: all 0, 1s ease-in;
+    margin-top: 10px;
+    justify-self: flex-end;
+  
+    
+    &:hover > svg {
+      fill: rgba(0, 0, 255);
+      };
+    }
   

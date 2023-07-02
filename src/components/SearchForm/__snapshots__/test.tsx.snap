@@ -24,7 +24,7 @@ exports[`SearchForm > renders snapshot 1`] = `
     />
   </div>
   <button
-    class="sc-eCtfAB sc-bPlwQk bkCXvO eXmeoh"
+    class="sc-eCtfAB fUbjvl"
     data-testid="submit-button-small"
     type="submit"
   >

@@ -11,8 +11,8 @@ const UpDownIcon = ({ isReversedOrder, isActive, isMediumDevice }: Props) => {
   const rotate = isReversedOrder ? '270deg' : '90deg';
   const iconStyle: React.CSSProperties = {
     fill: isMediumDevice ? Sv.black : Sv.iron,
-    height: '23px',
-    width: '23px',
+    height: isMediumDevice ? '18px' : '23px',
+    width: isMediumDevice ? '18px' : '23px',
     margin: '4px 0 6px',
     float: 'right',
     display: isActive ? 'block' : 'none',

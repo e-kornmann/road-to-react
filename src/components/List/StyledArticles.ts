@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as Sv from '../shared/StyleVariables';
 
-const Articles = styled.div`
+const StyledArticles = styled.div`
   font-family: 'Helvetica Textbook Roman';
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,4 +14,4 @@ const Articles = styled.div`
 }
 `;
 
-export default Articles;
+export default StyledArticles;

@@ -13,8 +13,8 @@ padding: 3px 6px 2px;
 border: 0.1em solid ${black};
 border-radius: 30px;
 
-&:hover {
-    background-color: aqua;
+&:hover { 
+    background-color: rgba(0, 0, 255, 0.698);
 }
 `;
 

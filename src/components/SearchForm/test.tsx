@@ -18,6 +18,7 @@ describe('SearchForm', () => {
     onSearchInput: vi.fn(),
     onSearchSubmit: vi.fn(),
     isMediumDevice: true,
+    hide: vi.fn(),
   };
 
   it('renders the input field with React as its initial value', () => {
