@@ -13,7 +13,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   border: none;
-  border-bottom: 1px dotted #727070;
+  border-bottom: 0.09em dotted #727070;
   background-color: transparent;
   font-size: 20px;
   width: 80%;

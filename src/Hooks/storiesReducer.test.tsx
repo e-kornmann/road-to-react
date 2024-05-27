@@ -10,6 +10,7 @@ describe('storiesReducer', () => {
       data: [],
       isLoading: false,
       isError: false,
+      page: 0,
     };
     const newState = storiesReducer(prevState, action);
     const expectedState = {
@@ -24,14 +25,18 @@ describe('storiesReducer', () => {
   it('updates state with succesfully fetched data', () => {
     const action: StoriesAction = {
       type: 'STORIES_FETCH_SUCCESS',
-      payload: [storyOne, storyTwo],
+      payload: {
+        list: [storyOne, storyTwo],
+        page: 0,
+      },
     };
-    const state: StoriesState = {
+    const loadingState: StoriesState = {
       data: [],
       isLoading: true,
       isError: false,
+      page: 0,
     };
-    const newState = storiesReducer(state, action);
+    const newState = storiesReducer(loadingState, action);
     const expectedState = {
       data: [storyOne, storyTwo],
       isLoading: false,
@@ -44,9 +49,10 @@ describe('storiesReducer', () => {
   it('removes a story from all stories', () => {
     const action: StoriesAction = { type: 'REMOVE_STORY', payload: storyOne };
     const prevState: StoriesState = {
-      data: [storyOne, storyTwo],
+      data: [],
       isLoading: false,
       isError: false,
+      page: 0,
     };
 
     const newState = storiesReducer(prevState, action);
@@ -63,8 +69,9 @@ describe('storiesReducer', () => {
     const action: StoriesAction = { type: 'STORIES_FETCH_FAILURE' };
     const prevState: StoriesState = {
       data: [],
-      isLoading: true,
+      isLoading: false,
       isError: false,
+      page: 0,
     };
 
     const newState = storiesReducer(prevState, action);

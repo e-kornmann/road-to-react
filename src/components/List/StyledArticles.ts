@@ -6,7 +6,7 @@ const StyledArticles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
-  grid-row-gap: 50px;
+  grid-row-gap: 35px;
   margin-bottom: 100px;
   
   @media only screen and (${Sv.breakpoints.medium}) {

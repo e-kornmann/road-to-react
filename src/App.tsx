@@ -6,7 +6,12 @@ import useStorageState from './Hooks/storageState';
 import List from './components/List';
 import { Article, StoriesState } from './types';
 import storiesReducer from './Hooks/storiesReducer';
-import API_ENDPOINT from './api';
+import {
+  API_BASE,
+  API_FRONTPAGE,
+  API_PAGE,
+  API_SEARCH,
+} from './api';
 import SearchForm from './components/SearchForm';
 import useMediaQuery from './Hooks/useMediaQuery';
 import * as S from './container';
@@ -30,7 +35,7 @@ const App = () => {
   const isLargeDevice = useMediaQuery(
     `only screen and (${Sv.breakpoints.large})`,
   );
-  const [searchTerm, setSearchTerm] = useStorageState('search', 'React');
+  const [searchTerm, setSearchTerm] = useStorageState('search', '');
   const [queryArray, setQueryArray] = React.useState([searchTerm]);
   const [hide, setHide] = React.useState(true);
 
@@ -38,6 +43,7 @@ const App = () => {
     data: [],
     isLoading: false,
     isError: false,
+    page: 0,
   });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,15 +63,20 @@ const App = () => {
     });
     try {
       const lastQuery = queryArray[queryArray.length - 1];
-      const result = await axios.get(`${API_ENDPOINT}${lastQuery}`);
+      const fetchThis = lastQuery === '' ? API_BASE + API_FRONTPAGE : API_BASE + API_SEARCH + lastQuery + API_PAGE + articles.page;
+      console.log(fetchThis);
+      const result = await axios.get(fetchThis);
       dispatchArticles({
         type: 'STORIES_FETCH_SUCCESS',
-        payload: result.data.hits,
+        payload: {
+          list: result.data.hits,
+          page: result.data.page,
+        },
       });
     } catch {
       dispatchArticles({ type: 'STORIES_FETCH_FAILURE' });
     }
-  }, [queryArray]);
+  }, [queryArray, articles.page]);
 
   React.useEffect(() => {
     handleFetchLastQuery();
@@ -101,10 +112,6 @@ const App = () => {
 
   const sumComments = React.useMemo(() => getSumComments(articles), [articles]);
   console.log(`My Hacker Stories with ${sumComments} comments.`);
-
-  console.log('App render');
-  console.log(`searchqueryState: ${queryArray}`);
-  console.log(`lastFiveSearches: ${lastFiveSearches}`);
 
   return (
     <>

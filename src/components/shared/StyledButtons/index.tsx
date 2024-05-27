@@ -4,7 +4,7 @@ import * as Sv from '../StyleVariables';
 const StyledButton = styled.button`
   fill: ${Sv.black};
   background: transparent;
-  border: 1px solid ${Sv.black};
+  border: 0.04em solid ${Sv.black};
   width: 80px;
   padding: 5px 0px;
   cursor: pointer;

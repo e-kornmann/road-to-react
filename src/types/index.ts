@@ -12,6 +12,7 @@ type Article = {
     data: Article[];
     isLoading: boolean;
     isError: boolean;
+    page: number;
   };
 
   type StoriesFetchInitAction = {
@@ -20,7 +21,10 @@ type Article = {
 
   type StoriesFetchSuccessAction = {
     type: 'STORIES_FETCH_SUCCESS';
-    payload: Article[];
+    payload: {
+      list: Article[];
+      page: number;
+    }
   };
 
   type StoriesFetchFailureAction = {

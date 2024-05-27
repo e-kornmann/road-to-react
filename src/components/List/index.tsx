@@ -46,7 +46,6 @@ const List = React.memo(({ list, onRemoveItem, isMediumDevice }: ListProps) => {
                 key={item.objectID}
                 item={item}
                 onRemoveItem={onRemoveItem}
-                isMediumDevice={isMediumDevice}
               />
             ))}
           </StyledArticles>

@@ -10,20 +10,23 @@ const LastFiveSearches = ({ lastFiveSearches, clickHandler, hide }: Props) => <d
   className='last-five-searches-mapper'
   style={{ display: hide ? 'none' : 'flex' }}>
 
-  { lastFiveSearches.map((q, index) => (
+  { lastFiveSearches.map((q, index) => {
+    if (q !== '') {
+      return (
         <button
-        key={q + index}
-        type="button"
-        onClick={() => {
-          clickHandler(q);
-        }
-      }
-        className="last-five-searches-mapper__mappingelement"
+          key={q + index}
+          type="button"
+          onClick={() => {
+            clickHandler(q);
+          }}
+          className="last-five-searches-mapper__mappingelement"
         >
-        {q}
+          {q}
         </button>
-  ))
-  }
+      );
+    }
+    return null;
+  })}
 
   </div>;
 
